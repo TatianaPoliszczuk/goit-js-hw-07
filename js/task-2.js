@@ -24,17 +24,19 @@ const images = [
     alt: "Lighthouse Coast Sea",
   },
 ];
+
 const galleryIm = document.querySelector(".gallery");
 galleryIm.style.display = "flex";
 galleryIm.style.gap = "48px 24px";
 galleryIm.style.flexWrap = "wrap";
 
-images.forEach((element) => {
-  const image = document.createElement("img");
-  image.src = element.url;
-  image.alt = element.alt;
-  image.style.display = "block";
-  image.style.width = "100%";
-  image.style.flexBasis = "calc((100% - 24px * 2) / 3)";
-  galleryIm.append(image);
-});
+const imagesMarkup = images
+  .map(
+    (element) => `
+    <li style="flex-basis: calc((100% - 24px * 2) / 3);">
+      <img src="${element.url}" alt="${element.alt}" style="display: block; width: 100%;" />
+    </li>`
+  )
+  .join("");
+
+galleryIm.insertAdjacentHTML("beforeend", imagesMarkup);
